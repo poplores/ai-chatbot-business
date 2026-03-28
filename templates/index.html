@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hands4YouAssembly — Professional Assembly Services DMV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --yellow: #FFD600;
+            --yellow-dark: #e6c000;
+            --white: #f5f5f0;
+            --gray: #1a1a1a;
+            --gray-mid: #2a2a2a;
+            --gray-light: #888;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+        nav { position: fixed; top: 36px; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 20px 60px; background: rgba(10,10,10,0.95); backdrop-filter: blur(10px); border-bottom: 2px solid var(--yellow); }
+        .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; color: var(--yellow); }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { color: var(--white); text-decoration: none; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--yellow); }
+        .nav-cta { background: var(--yellow); color: var(--black) !important; padding: 10px 24px; font-weight: 700 !important; }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 160px 60px 80px; position: relative; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,214,0,0.03) 40px, rgba(255,214,0,0.03) 41px); }
+        .hero-accent { position: absolute; right: -100px; top: 50%; transform: translateY(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(255,214,0,0.12) 0%, transparent 70%); pointer-events: none; }
+        .hero-content { position: relative; max-width: 800px; }
+        .hero-badge { display: inline-block; background: var(--yellow); color: var(--black); font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 6px 16px; margin-bottom: 24px; }
+        .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.9; letter-spacing: 2px; margin-bottom: 30px; }
+        .hero h1 span { color: var(--yellow); }
+        .hero-sub { font-size: 1.2rem; color: var(--gray-light); max-width: 500px; line-height: 1.7; margin-bottom: 40px; }
+        .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn-primary { background: var(--yellow); color: var(--black); padding: 16px 36px; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.1s; }
+        .btn-primary:hover { background: var(--yellow-dark); transform: translateY(-2px); }
+        .btn-outline { background: transparent; color: var(--white); padding: 16px 36px; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border: 2px solid rgba(255,255,255,0.3); cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s, transform 0.1s; }
+        .btn-outline:hover { border-color: var(--yellow); color: var(--yellow); transform: translateY(-2px); }
+        .hero-stats { display: flex; gap: 60px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--yellow); line-height: 1; }
+        .stat-label { font-size: 0.8rem; color: var(--gray-light); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+        .section { padding: 100px 60px; }
+        .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--yellow); margin-bottom: 16px; }
+        .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; margin-bottom: 60px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; }
+        .service-card { background: var(--gray); padding: 40px; position: relative; overflow: hidden; transition: transform 0.3s; cursor: default; }
+        .service-card:hover { transform: translateY(-4px); }
+        .service-card:hover .service-card-accent { opacity: 1; }
+        .service-card-accent { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--yellow); opacity: 0; transition: opacity 0.3s; }
+        .service-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .service-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+        .service-card p { color: var(--gray-light); font-size: 0.95rem; line-height: 1.7; }
+        .pricing-section { background: var(--gray); padding: 100px 60px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1000px; }
+        .pricing-card { background: var(--black); padding: 40px; border: 1px solid rgba(255,255,255,0.08); position: relative; transition: transform 0.3s, border-color 0.3s; }
+        .pricing-card:hover { transform: translateY(-6px); border-color: var(--yellow); }
+        .pricing-card.featured { border-color: var(--yellow); background: var(--gray-mid); }
+        .featured-badge { position: absolute; top: -12px; left: 40px; background: var(--yellow); color: var(--black); font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; }
+        .pricing-tier { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--yellow); margin-bottom: 16px; }
+        .pricing-price { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; line-height: 1; margin-bottom: 8px; }
+        .pricing-price span { font-family: 'Barlow', sans-serif; font-size: 1rem; color: var(--gray-light); }
+        .pricing-desc { color: var(--gray-light); font-size: 0.9rem; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .pricing-features { list-style: none; }
+        .pricing-features li { font-size: 0.9rem; color: var(--gray-light); padding: 8px 0; display: flex; align-items: center; gap: 10px; }
+        .pricing-features li::before { content: '✓'; color: var(--yellow); font-weight: 700; flex-shrink: 0; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+        .gallery-item { background: var(--gray); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative; overflow: hidden; transition: transform 0.3s; }
+        .gallery-item:hover { transform: scale(0.98); }
+        .gallery-item:first-child { grid-column: span 2; aspect-ratio: 2/1; }
+        .gallery-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 20px 16px 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; opacity: 0; transition: opacity 0.3s; }
+        .gallery-item:hover .gallery-label { opacity: 1; }
+        .contact-section { background: var(--gray); padding: 100px 60px; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        .contact-info h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; margin-bottom: 24px; }
+        .contact-info p { color: var(--gray-light); line-height: 1.8; margin-bottom: 40px; }
+        .contact-detail { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .contact-detail-icon { width: 44px; height: 44px; background: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+        .contact-detail-text strong { display: block; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-light); margin-bottom: 2px; }
+        .contact-detail-text a { color: var(--white); text-decoration: none; font-weight: 600; }
+        .contact-detail-text a:hover { color: var(--yellow); }
+        .contact-form { display: flex; flex-direction: column; gap: 16px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-light); }
+        .form-group input, .form-group select, .form-group textarea { background: var(--black); border: 1px solid rgba(255,255,255,0.1); color: var(--white); padding: 14px 16px; font-family: 'Barlow', sans-serif; font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--yellow); }
+        .form-group select option { background: var(--black); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-submit { background: var(--yellow); color: var(--black); padding: 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+        .form-submit:hover { background: var(--yellow-dark); }
+        .form-success { display: none; background: rgba(255,214,0,0.1); border: 1px solid var(--yellow); padding: 16px; text-align: center; color: var(--yellow); font-weight: 600; }
+        .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
+        .chat-toggle { width: 60px; height: 60px; background: var(--yellow); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 20px rgba(255,214,0,0.4); transition: transform 0.2s, box-shadow 0.2s; margin-left: auto; }
+        .chat-toggle:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(255,214,0,0.5); }
+        .chat-box { position: absolute; bottom: 76px; right: 0; width: 360px; background: var(--gray); border: 1px solid rgba(255,214,0,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.5); display: none; flex-direction: column; overflow: hidden; }
+        .chat-box.open { display: flex; }
+        .chat-header { background: var(--yellow); color: var(--black); padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+        .chat-header-dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; flex-shrink: 0; }
+        .chat-header-info strong { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .chat-header-info span { font-size: 0.75rem; opacity: 0.7; }
+        .chat-messages { flex: 1; height: 300px; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+        .chat-messages::-webkit-scrollbar { width: 4px; }
+        .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); }
+        .msg { max-width: 85%; padding: 10px 14px; font-size: 0.9rem; line-height: 1.5; }
+        .msg.bot { background: var(--gray-mid); color: var(--white); align-self: flex-start; border-radius: 0 12px 12px 12px; }
+        .msg.user { background: var(--yellow); color: var(--black); align-self: flex-end; font-weight: 600; border-radius: 12px 0 12px 12px; }
+        .msg.typing { background: var(--gray-mid); align-self: flex-start; border-radius: 0 12px 12px 12px; color: var(--gray-light); font-style: italic; }
+        .chat-input-area { display: flex; border-top: 1px solid rgba(255,255,255,0.08); }
+        .chat-input { flex: 1; background: var(--black); border: none; color: var(--white); padding: 14px 16px; font-family: 'Barlow', sans-serif; font-size: 0.9rem; outline: none; }
+        .chat-send { background: var(--yellow); color: var(--black); border: none; padding: 14px 20px; cursor: pointer; font-size: 1rem; font-weight: 700; transition: background 0.2s; }
+        .chat-send:hover { background: var(--yellow-dark); }
+        footer { background: var(--black); border-top: 2px solid var(--yellow); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--yellow); }
+        footer p { color: var(--gray-light); font-size: 0.85rem; }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; top: 36px; }
+            .nav-links { display: none; }
+            .hero, .section, .pricing-section, .contact-section { padding: 80px 24px; }
+            .hero { padding-top: 120px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .gallery-item:first-child { grid-column: span 2; }
+            footer { padding: 30px 24px; flex-direction: column; text-align: center; }
+            .hero-stats { gap: 30px; flex-wrap: wrap; }
+            .form-row { grid-template-columns: 1fr; }
+            .chat-box { width: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BANNER -->
+<div style="position:fixed; top:0; left:0; right:0; z-index:101; background: var(--yellow); color: var(--black); text-align: center; padding: 8px 20px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
+    Also visit our sister company:
+    <a href="https://www.hands4youllc.com" target="_blank" style="color: var(--black); text-decoration: underline; margin-left: 8px;">Hands 4 You LLC →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+    <div style="display:flex; align-items:center; gap:12px;">
+        <img src="/static/images/logo.jpg" style="height:60px; width:auto; max-width:200px; object-fit:contain; display:block;">
+        <div class="nav-logo">Hands4You Assembly</div>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content">
+        <div class="hero-badge">Maryland / DC / Northern Virginia</div>
+        <h1>We <span>Build</span><br>You <span>Relax.</span></h1>
+        <p class="hero-sub">Professional assembly services for IKEA furniture, office setups, gym equipment, and TV mounting — done right, done fast.</p>
+        <div class="hero-btns">
+            <a href="#contact" class="btn-primary">Get a Free Quote</a>
+            <a href="#services" class="btn-outline">See Our Services</a>
+        </div>
+        <div class="hero-stats">
+            <div><div class="stat-num">500+</div><div class="stat-label">Jobs Completed</div></div>
+            <div><div class="stat-num">5★</div><div class="stat-label">Avg. Rating</div></div>
+            <div><div class="stat-num">DMV</div><div class="stat-label">Service Area</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Our Services</h2>
+    <div class="services-grid fade-in">
+        <div class="service-card"><div class="service-card-accent"></div><div class="service-icon">🛋️</div><h3>IKEA & Flat-Pack Furniture</h3><p>Full assembly of any IKEA or flat-pack furniture. Wardrobes, beds, desks, shelves — we handle it all so you don't have to.</p></div>
+        <div class="service-card"><div class="service-card-accent"></div><div class="service-icon">🏢</div><h3>Office Furniture</h3><p>Desks, chairs, cubicles, filing cabinets and more. We set up professional workspaces for home offices and commercial spaces.</p></div>
+        <div class="service-card"><div class="service-card-accent"></div><div class="service-icon">🏋️</div><h3>Gym Equipment</h3><p>Treadmills, weight racks, benches, cable machines — complex equipment assembled correctly and safely the first time.</p></div>
+        <div class="service-card"><div class="service-card-accent"></div><div class="service-icon">📺</div><h3>TV Mounting</h3><p>Clean, secure TV mounting on any wall type. We handle the brackets, cables, and make sure everything looks perfect.</p></div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+    <div class="section-label">Transparent Pricing</div>
+    <h2 class="section-title">Simple & Fair</h2>
+    <div class="pricing-grid fade-in">
+        <div class="pricing-card">
+            <div class="pricing-tier">Basic</div>
+            <div class="pricing-price">$75 <span>starting at</span></div>
+            <div class="pricing-desc">Single small item assembly. Perfect for one piece of furniture.</div>
+            <ul class="pricing-features"><li>1 furniture item</li><li>Up to 1 hour</li><li>All tools provided</li><li>Clean up included</li></ul>
+        </div>
+        <div class="pricing-card featured">
+            <div class="featured-badge">Most Popular</div>
+            <div class="pricing-tier">Standard</div>
+            <div class="pricing-price">$150 <span>starting at</span></div>
+            <div class="pricing-desc">Multiple items or a larger complex assembly job.</div>
+            <ul class="pricing-features"><li>2–4 furniture items</li><li>Up to 3 hours</li><li>All tools provided</li><li>Clean up included</li><li>Same-day availability</li></ul>
+        </div>
+        <div class="pricing-card">
+            <div class="pricing-tier">Full Room</div>
+            <div class="pricing-price">$250 <span>starting at</span></div>
+            <div class="pricing-desc">Complete room or office setup. We handle everything.</div>
+            <ul class="pricing-features"><li>Unlimited items</li><li>Full day service</li><li>All tools provided</li><li>Clean up included</li><li>Priority scheduling</li><li>Free follow-up visit</li></ul>
+        </div>
+    </div>
+    <p style="color: var(--gray-light); margin-top: 30px; font-size: 0.9rem;">* Prices vary based on complexity. Contact us for a free custom quote.</p>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+    <div class="section-label">Our Work</div>
+    <h2 class="section-title">Recent Projects</h2>
+    <div class="gallery-grid fade-in">
+        <div class="gallery-item" style="padding:0; background:#111;"><img src="/static/images/job2.jpg" style="width:100%;height:100%;object-fit:cover;"><div class="gallery-label">Playset Assembly</div></div>
+        <div class="gallery-item" style="padding:0; background:#111;"><img src="/static/images/job3.jpg" style="width:100%;height:100%;object-fit:cover;"><div class="gallery-label">Outdoor Swing Set</div></div>
+        <div class="gallery-item" style="padding:0; background:#111;"><img src="/static/images/job4.jpg" style="width:100%;height:100%;object-fit:cover;"><div class="gallery-label">Dining Set Assembly</div></div>
+        <div class="gallery-item" style="padding:0; background:#111;"><img src="/static/images/job5.jpg" style="width:100%;height:100%;object-fit:cover;"><div class="gallery-label">Trampoline Assembly</div></div>
+        <div class="gallery-item" style="padding:0; background:#111;"><img src="/static/images/job11.jpg" style="width:100%;height:100%;object-fit:cover;"><div class="gallery-label">Shelving Unit Install</div></div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+    <div class="contact-grid">
+        <div class="contact-info fade-in">
+            <div class="section-label">Get In Touch</div>
+            <h2>Ready to Get Started?</h2>
+            <p>Fill out the form and we'll get back to you within a few hours with a free quote. Same-day and next-day appointments available.</p>
+            <div class="contact-detail"><div class="contact-detail-icon">📞</div><div class="contact-detail-text"><strong>Phone</strong><a href="tel:3015378884">(301) 537-8884</a></div></div>
+            <div class="contact-detail"><div class="contact-detail-icon">✉️</div><div class="contact-detail-text"><strong>Email</strong><a href="mailto:brandaneisbey@gmail.com">brandaneisbey@gmail.com</a></div></div>
+            <div class="contact-detail"><div class="contact-detail-icon">📍</div><div class="contact-detail-text"><strong>Service Area</strong><span>Maryland, DC & Northern Virginia</span></div></div>
+        </div>
+        <div class="fade-in">
+            <div class="contact-form">
+                <div class="form-row">
+                    <div class="form-group"><label>First Name</label><input type="text" placeholder="John"></div>
+                    <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+                </div>
+                <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="(301) 555-0000"></div>
+                <div class="form-group"><label>Email</label><input type="email" placeholder="john@email.com"></div>
+                <div class="form-group">
+                    <label>Service Needed</label>
+                    <select>
+                        <option value="">Select a service...</option>
+                        <option>IKEA / Flat-Pack Furniture</option>
+                        <option>Office Furniture</option>
+                        <option>Gym Equipment</option>
+                        <option>TV Mounting</option>
+                        <option>Multiple Items</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Message</label><textarea placeholder="Tell us what you need assembled and your location..."></textarea></div>
+                <button class="form-submit" onclick="submitForm()">Send Message & Get Quote →</button>
+                <div class="form-success" id="formSuccess">✓ Message sent! We'll get back to you within a few hours.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div style="display:flex; align-items:center; gap:12px;">
+        <img src="/static/images/logo.jpg" style="height:50px; width:auto; object-fit:contain;">
+        <div class="footer-logo">Hands4You Assembly</div>
+    </div>
+    <p>© 2025 Hands4YouAssembly. Serving Maryland, DC & Northern Virginia.</p>
+    <p style="color: var(--gray-light); font-size: 0.8rem;">Website built by <a href="https://github.com/poplores/ai-chatbot-business" style="color: var(--yellow); text-decoration: none;">poplores</a></p>
+</footer>
+
+<!-- CHATBOT WIDGET -->
+<div class="chat-widget">
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">
+            <div class="chat-header-dot"></div>
+            <div class="chat-header-info"><strong>H4Y Assistant</strong><span>Usually replies instantly</span></div>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg bot">Hey! 👋 Welcome to Hands4YouAssembly. How can I help you today? Ask me about our services, pricing, or to book an appointment!</div>
+        </div>
+        <div class="chat-input-area">
+            <input class="chat-input" id="chatInput" placeholder="Ask us anything..." onkeypress="if(event.key==='Enter')sendChat()">
+            <button class="chat-send" onclick="sendChat()">➤</button>
+        </div>
+    </div>
+    <button class="chat-toggle" onclick="toggleChat()" id="chatToggle">💬</button>
+</div>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    function toggleChat() {
+        const box = document.getElementById('chatBox');
+        const btn = document.getElementById('chatToggle');
+        box.classList.toggle('open');
+        btn.textContent = box.classList.contains('open') ? '✕' : '💬';
+    }
+
+    async function sendChat() {
+        const input = document.getElementById('chatInput');
+        const messages = document.getElementById('chatMessages');
+        const text = input.value.trim();
+        if (!text) return;
+        messages.innerHTML += `<div class="msg user">${text}</div>`;
+        input.value = '';
+        messages.innerHTML += `<div class="msg typing" id="typing">Typing...</div>`;
+        messages.scrollTop = messages.scrollHeight;
+        try {
+            const res = await fetch('/chat', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({message: text}) });
+            const data = await res.json();
+            document.getElementById('typing')?.remove();
+            messages.innerHTML += `<div class="msg bot">${data.reply}</div>`;
+        } catch {
+            document.getElementById('typing')?.remove();
+            messages.innerHTML += `<div class="msg bot">Sorry, I'm having trouble connecting. Please call us at (301) 537-8884!</div>`;
+        }
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    function submitForm() {
+        document.getElementById('formSuccess').style.display = 'block';
+        setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000);
+    }
+</script>
+</body>
+</html>
