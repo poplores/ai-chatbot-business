@@ -357,20 +357,20 @@
             gap: 4px;
         }
 
-        .gallery-item {
-            background: var(--gray);
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
+ .gallery-item {
+    background: var(--gray);
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    }
 
         .gallery-item:hover { transform: scale(0.98); }
-        .gallery-item:first-child { grid-column: span 2; aspect-ratio: 2/1; }
+        .gallery-item:first-child { grid-column: span 2; aspect-ratio: 16/9; }
 
         .gallery-label {
             position: absolute;
