@@ -65,9 +65,9 @@
         .pricing-features li { font-size: 0.9rem; color: var(--gray-light); padding: 8px 0; display: flex; align-items: center; gap: 10px; }
         .pricing-features li::before { content: '✓'; color: var(--yellow); font-weight: 700; flex-shrink: 0; }
         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
-        .gallery-item { background: var(--gray); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative; overflow: hidden; transition: transform 0.3s; }
+        .gallery-item { background: var(--gray); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative; overflow: hidden; transition: transform 0.3s; }
         .gallery-item:hover { transform: scale(0.98); }
-        .gallery-item:first-child { grid-column: span 2; aspect-ratio: 2/1; }
+        .gallery-item:first-child { grid-column: span 2; aspect-ratio: 16/9; }
         .gallery-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 20px 16px 16px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; opacity: 0; transition: opacity 0.3s; }
         .gallery-item:hover .gallery-label { opacity: 1; }
         .contact-section { background: var(--gray); padding: 100px 60px; }
